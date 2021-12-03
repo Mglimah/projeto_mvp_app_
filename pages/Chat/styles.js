@@ -29,20 +29,18 @@ export const ContainerMsgBox = styled.Text`
     border: 1px solid #333;
     left: ${props=> props.variavel ? '70px': '0px' };
     width:80%;
-    height:50px;
     border-radius:5px;
     font-size:12px;
     padding:6px;
     margin-bottom:25px;
     flex:1;
-    align-items:center;
 `;
 
 export const Message = styled.Text`
     color: #fff;
     font-size:15px;
     margin-bottom:10px;
-`;
+`; 
 
 export const MessageData = styled.Text`
     color: #fff;

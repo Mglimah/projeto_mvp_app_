@@ -19,10 +19,15 @@ import {
 import logoImg from '../../assets/logo.png';
 
 import { UsuarioContext } from "../../contexts/user";
+import ForgotPassword from "../ForgotPassword";
+import { Text, TouchableOpacity } from "react-native";
 
-const Login = () => {
+import { NavigationContainer } from '@react-navigation/native';
 
-    const {signIn, signUp} = useContext(UsuarioContext);
+
+const Login = ({navigation}) => {
+
+    const {signIn, signUp, signInAnonymously} = useContext(UsuarioContext);
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
@@ -39,6 +44,7 @@ const Login = () => {
                         onPress={()=>{setCurrentButton('membro')}}>
                         <BotaoTexto lastClick={currentButton == 'membro'? true:false}>Membro</BotaoTexto>
                     </Botao>
+
                     <Botao
                         lastClick={currentButton == 'convidado'? true:false}
                         onPress={()=>{setCurrentButton('convidado')}}>
@@ -60,9 +66,9 @@ const Login = () => {
                     secureTextEntry={true}
                 />
 
-                <ForgotPasswordText>
-                    Esqueci minha senha
-                </ForgotPasswordText>
+                <TouchableOpacity onPress={()=>navigation.navigate('ForgotPassword')}>
+                    <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+                </TouchableOpacity> 
 
                 <ContainerSubmit>
                     <BotaoSubmit onPress={()=>{signUp(email,password)}} invert={true}>
@@ -76,14 +82,6 @@ const Login = () => {
 
             </CaixaLogin>
         </Container>
-        //<View style={{marginTop:30}}>
-        //    <TouchableOpacity onPress={()=>{signUp(email,password)}}>
-        //        <Text>Cadastrar</Text>
-        //    </TouchableOpacity>
-        //    <TouchableOpacity onPress={()=>{signIn(email,password)}}>
-        //        <Text>Login</Text>
-        //    </TouchableOpacity>
-        //</View>
     )
 }
 

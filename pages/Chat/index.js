@@ -4,6 +4,7 @@ import firebaseApp from "../../services/firebase";
 
 import { UsuarioContext } from "../../contexts/user";
 
+
 import {
     getFirestore,
     addDoc,
@@ -11,7 +12,7 @@ import {
     onSnapshot,
     query,
     orderBy,
-    Timestamp
+    Timestamp,
 } from 'firebase/firestore';
 
 import { 
@@ -62,13 +63,16 @@ const Chat = () => {
                 lido:false,
                 date:Timestamp.fromDate(new Date()),
                 owner:user.email,
-                mensagem:text
+                mensagem:text,
             })
         }catch(err){
             console.log('err',err)
         }
     }
 
+    const anotherFunc = (val) =>{
+        setText('');
+    }
 
     return (
         <Container>
@@ -85,7 +89,7 @@ const Chat = () => {
                     placeholder="Digite sua mensagem"
                     onChangeText={text=>setText(text)}
                 />
-                <Button onPress={()=>{handleMessage(text)}}>
+                <Button onPress={()=>{handleMessage(text), anotherFunc(text)}}>
                         <IconEnvia source={IconImg} />
                 </Button>
             </ContainerMsg>

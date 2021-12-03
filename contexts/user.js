@@ -2,13 +2,18 @@ import React, {createContext, useState, useEffect} from "react";
 
 import firebaseApp from '../services/firebase';
 
+import { getFirestore } from '@firebase/firestore';
+
 import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut as signOutFirebase,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendPasswordResetEmail
     } from 'firebase/auth';
+
+import { NavigationContainer } from '@react-navigation/native';
 
 const auth = getAuth();
 
@@ -28,7 +33,7 @@ const UsuarioProvider = ({children}) =>{
         signInWithEmailAndPassword(auth,email,password).then(resp=>{
 
             })
-            .catch(err=>console.warn(err))
+            .catch(err=>console.error('Falha no login. Tente novamente'))
     }
 
     const signUp = async (email,password) => {
@@ -44,9 +49,23 @@ const UsuarioProvider = ({children}) =>{
         })
         .catch(err=>console.warn(err))
     }
+
+    const signInAnonymously = async (email) => {
+        signInAnonymously(auth,email).then(resp=>{
+
+            })
+            .catch(err=>console.error('Falha no login. Tente novamente'))
+    }
+
+    const passwordReset = async (email) => {
+        sendPasswordResetEmail(auth,email).then(resp=>{
+            console.warn('Por favor, verifique seu e-mail')
+        })
+        .catch(err=>console.error(err))
+    }
     
     return(
-        <UsuarioContext.Provider value={{user, signIn, signUp, signOut}}>
+        <UsuarioContext.Provider value={{user, signIn, signUp, signOut, signInAnonymously, passwordReset}}>
             {children}
         </UsuarioContext.Provider>
     )
