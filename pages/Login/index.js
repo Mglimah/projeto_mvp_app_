@@ -27,7 +27,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const Login = ({navigation}) => {
 
-    const {signIn, signUp, signInAnonymously} = useContext(UsuarioContext);
+    const {signIn, signUp} = useContext(UsuarioContext);
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")

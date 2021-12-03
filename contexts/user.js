@@ -50,13 +50,6 @@ const UsuarioProvider = ({children}) =>{
         .catch(err=>console.warn(err))
     }
 
-    const signInAnonymously = async (email) => {
-        signInAnonymously(auth,email).then(resp=>{
-
-            })
-            .catch(err=>console.error('Falha no login. Tente novamente'))
-    }
-
     const passwordReset = async (email) => {
         sendPasswordResetEmail(auth,email).then(resp=>{
             console.warn('Por favor, verifique seu e-mail')
@@ -65,7 +58,7 @@ const UsuarioProvider = ({children}) =>{
     }
     
     return(
-        <UsuarioContext.Provider value={{user, signIn, signUp, signOut, signInAnonymously, passwordReset}}>
+        <UsuarioContext.Provider value={{user, signIn, signUp, signOut, passwordReset}}>
             {children}
         </UsuarioContext.Provider>
     )
